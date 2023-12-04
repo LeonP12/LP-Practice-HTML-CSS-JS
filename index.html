@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="master.css">
+    <title>Project Management Form</title>
+</head>
+<body>
+    <ul> <!-- Navigation bar -->
+        <li><a href="signUp.html">Home</a></li>
+        <li><a href="index.html" class="active-form">Form</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">About</a></li>
+    </ul>
+
+    <h1 id="formTitle"><strong><u>Project Management Form</u></strong></h1>
+    <p>Fill out the form with all that apply. This form will be about information relating to a project.</p>
+    <!-- Added "event" parameter to the validateForm function in the onsubmit attribute -->
+    <form id="projectForm" method="post" onsubmit="return validateForm(event)">
+        <div class="centre">
+            <label for="projectName">Project Name:</label>
+            <input type="text" class="round" id="projectName" name="projectName" placeholder="Project Name">
+            <label id="label" style="color:red; visibility: hidden;">Invalid </label>
+            <br>
+            <label for="assign">Assigned To:</label>
+            <select id="assign" class="round" name="assign">
+                <!-- Default placeholder option -->
+                <option value="" selected disabled>Select an option</option>
+                <!-- Other options -->
+                <option value="manager">Manager</option>
+                <option value="admin">Admin</option>
+                <option value="contractor">Contractor</option>
+            </select>
+            <br><br>
+            <label for="startDate">Start Date:</label>
+            <input type="date" class="round" id="startDate" name="startDate">
+            <br><br>
+            <label for="endDate">End Date:</label>
+            <input type="date" class="round" id="endDate" name="endDate">
+            <br><br>
+
+            <div id="checkbox">
+                <label for="landType">Select All That Apply:</label>
+                <br>
+                <input type="checkbox" id="Hotel" name="landType" value="Hotel">
+                <label for="Hotel">Hotel</label>
+
+                <input type="checkbox" id="Duplex" name="landType" value="Duplex">
+                <label for="Duplex">Duplex</label>
+
+                <input type="checkbox" id="Urban" name="landType" value="Urban">
+                <label for="Urban">Urban</label>
+
+                <input type="checkbox" id="Double" name="landType" value="Double">
+                <label for="Double">Double</label>
+            </div>
+            <br>
+            <div id="priority">
+                <label for="priorityLevel">Select the level of priority:</label>
+                <br>
+                <label for="high">High</label>
+                <input type="radio" id="high" name="priority" value="high">
+                <label for="average">Average</label>
+                <input type="radio" id="average" name="priority" value="average">
+                <label for="low">Low</label>
+                <input type="radio" id="low" name="priority" value="low">
+            </div>
+            <br>
+
+            <label for="description">Description:</label>
+            <textarea id="description" class="round" name="description" rows="4" cols="37"></textarea>
+            <br><br>
+
+            <div id="fileDiv">
+                <label for="file">Upload Relevant Files:</label>
+                <input type="file" id="file" name="file">
+            </div>
+            <br>
+
+            <button type="submit" id="submitButton">Submit</button>
+            <button type="reset" id="resetButton">Reset</button>
+        </div>
+    </form>
+    <br>
+    <div id="text">
+        <h2>Lorem ipsum dolor sit amet</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore 
+            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
+            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
+            eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+            mollit anim id est laborum.</p>
+    </div>
+    <img src="cat.jpg" alt="kitty cat" width="500" height="300">
+</body>
+
+<script>
+    function validateForm(event) {
+        var projectVariable = document.getElementById("projectName");
+        var isValid = false;
+        var projectNameValid = /^[a-zA-Z0-9]+$/;
+        var projectName = document.getElementById("projectName").value;
+
+        // Check if the project name is blank
+        if (projectVariable.value.trim() === "") {
+            // Prevent the form from submitting
+            event.preventDefault();
+            // Highlight the input field in red
+            projectVariable.style.color = "red";
+            projectVariable.style.borderColor = "red";
+            document.getElementById("label").style.visibility = "visible";
+            isValid = false;
+            // Display an alert
+            alert("Project name is blank");
+        }
+        if(!projectNameValid.test(projectName)){
+            event.preventDefault();
+            alert("Invalid input. Use letters and numbers only.");
+        }
+        
+        if(isValid == true){
+            document.getElementById("label").style.visibility= "hidden";
+        }
+        var priorityButtons = document.getElementsByName("priority");
+        var isPrioritySelected = false;
+        
+        for (var i = 0; i < priorityButtons.length; i++) {
+            if (priorityButtons[i].checked) {
+                isPrioritySelected = true;
+                break;
+            }
+        }
+        if (!isPrioritySelected) {
+            event.preventDefault();
+            alert("Please select a priority level");
+        }
+    }
+</script>
+</html>

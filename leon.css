@@ -1,0 +1,81 @@
+*{
+}
+
+h1{
+    background-color: grey;
+}
+
+#centre{/*just for the centre of the div elements*/
+background-color: lightcoral;
+border: 1px solid rgb(5, 3, 3);
+margin: auto;
+width: 50%;
+padding: 10px;
+border-radius: 10px;
+color: yellow;
+text-align: center;
+}
+
+body{
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-image: url('cat.jpg');
+    background-size: cover; /* or 'contain' or '100% 100%' */
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* or 'scroll' */
+    background-position: left;
+}
+
+#submitbutt{
+    background-color: blanchedalmond;
+    color: red;
+    font-size: 14px;
+    border-color: red;
+    transition-duration: 0.5s;
+}
+
+#submitbutt:hover{
+    background-color:gold;
+    color: black;
+    border-color: greenyellow;
+}
+
+#resetbutt{
+    background-color: darkmagenta;
+    color: white;
+    font-size: 14px;
+    border-color: red;
+    transition-duration: 0.5s;
+}
+
+#resetbutt:hover{
+    background-color: lightblue;
+    border-color: greenyellow;
+}
+
+.roundBox{
+    border-radius: 10px;
+}
+
+#termCheckbox{
+    background-color: cadetblue;
+    font-size: 10px;
+}
+
+@media only screen and (max-width: 400px){
+    body{
+        background-color: black;
+        text-align: center;
+        background-image: url('cat.jpg');
+        background-size: cover; /* or 'contain' or '100% 100%' */
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* or 'scroll' */
+        background-position: left;
+    }
+    #centre{
+        background-color: lightgreen;
+        }
+    #termCheckbox{
+            background-color: cadetblue;
+            font-size: 10px;
+        }
+}

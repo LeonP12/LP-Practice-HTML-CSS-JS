@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="leon.css">
+    <title>Sign Up Page</title>
+</head>
+<!--Add a Fist name, last name, email, password, username, date of birth, register button, reset button-->
+<body>
+    <h1>Sign Up Here!</h1>
+    <form id="signUpForm" method="post" onsubmit="validate(event);">
+        <div id="centre">
+            <h2>Hello world</h2>
+            
+            <label for="FirstName">First Name:</label>
+            <input type="text" id="FirstName" class="roundBox" name="FirstName" placeholder="Enter First Name" onfocus="applyEffects('FirstName')" onblur="applyEffects('FirstName')">
+            <label class="invalidText" style="color:red; visibility: hidden;">Invalid Name</label> <!--so the general way of the js on focus and blur events is just call the method and then pass the argument-->
+            
+            <br>
+
+            <label for="LastName">Last Name:</label>
+            <input type="text" id="LastName" class="roundBox"name="LastName" placeholder="Enter Last Name" onfocus="applyEffects('LastName')" onblur="applyEffects('LastName')"> 
+            <label class="invalidText" style="color:red; visibility: hidden;">Invalid Name</label>
+            
+            <br>
+            
+            <label for="username">Username:</label>
+            <input type="text" id="username"class="roundBox" name="username" placeholder="Enter Username" onfocus="applyEffects('username')" onblur="applyEffects('username')">
+            <label class="invalidText" style="color:red; visibility: hidden;">Invalid Text</label>
+            
+            <br>
+
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email"class="roundBox" placeholder="Enter Email" onfocus="applyEffects('email')" onblur="applyEffects('email')">
+            <label id="invalidEmail" style="color:red; visibility: hidden;">Invalid Email</label>
+            
+            <br>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password"class="roundBox" name="password" placeholder="Enter Password" onfocus="applyEffects('password')" onblur="applyEffects('password')" oninput="validatePassword()">
+            <label id="invalidPassword" style="color:red; visibility: hidden;">Invalid Password</label>
+            
+            <br>
+            
+            <label for="repeatPassword">Re-Enter Password:</label>
+            <input type="password" id="repeatPassword" class="roundBox" name="repeatPassword" placeholder="Re-Enter Password" onfocus="applyEffects('repeatPassword')" onblur="applyEffects('repeatPassword')" oninput="validatePassword()">
+            <br>
+            
+            <label for="dateOfBirth">Date of Birth:</label>
+            <input type="date" id="dateOfBirth" class="roundBox" name="dateOfBirth" placeholder="Enter Date Of Birth" onfocus="applyEffects('dateOfBirth')" onblur="applyEffects('dateOfBirth')" style="color: black;">
+            
+            <br>
+            <input type="checkbox" id="termsCheckbox" name="termsCheckbox">
+            <label for="termsCheckbox" id="termCheckbox">I agree to the <a href="/terms" target="_blank">Terms of Service</a> and <a href="/privacy" target="_blank">Privacy Policy</a> </label>
+            <br>
+            <button type="submit" id="submitbutt" value="#">Sign Up</button>
+            <button type="reset" id="resetbutt" value="Reset">Reset</button>
+        </div>
+    </form>
+</body>
+<script>
+    function validate(event) {
+        validateFirstName();
+        validateLastName();
+        validateEmail();
+        validatePassword();
+        return true; // if checks are passed, the form can be submitted
+    }
+
+    function validatePassword() {
+    // Password needs to have 6 min, one number, and one special character
+    var passwordRegEx = /^(?=.*\d)(?=.*[!@#$%^&*()-_+=])[A-Za-z\d!@#$%^&*()-_+=]{6,}$/;
+    var password = document.getElementById("password").value;
+    var repeatPassword = document.getElementById("repeatPassword").value;
+    var invalidPassword = document.getElementById("invalidPassword");
+
+    if (!passwordRegEx.test(password) || password !== repeatPassword) {
+        alert("Password must have 6 characters minimum, at least one number, and one special character, or passwords do not match");
+        invalidPassword.style.visibility = "visible";
+        event.preventDefault();
+    }
+}
+
+
+    function validateEmail(){
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+        var email = document.getElementById("email").value.trim();
+        if(!emailRegex.test(email) || email === ""){
+            alert("email not match");
+            invalidEmail.style.visibility = "visible";
+        }
+    }
+
+    function validateLastName(){
+        var textRegex = /^[a-zA-Z\s]*$/;
+        var lName = document.getElementById("LastName").value.trim();
+        var invalidLastName = document.getElementsByClassName("invalidText")[1];
+        if (!textRegex.test(lName) || lName === "") {
+            alert("Last Name does not match or is blank");
+            invalidLastName.style.visibility = "visible";
+            event.preventDefault();
+        }
+    }
+
+    function validateFirstName(){
+        var textRegex = /^[a-zA-Z\s]*$/;
+        var fName = document.getElementById("FirstName").value.trim();
+        var invalidFirstName = document.getElementsByClassName("invalidText")[0];
+        if (!textRegex.test(fName) || fName === "") {
+            alert("First Name does not match or is blank");
+            invalidFirstName.style.visibility = "visible";
+            event.preventDefault();
+        }
+    }
+
+    function applyEffects(elementId){//a general way to apply effects to text boxes
+        var inputElement = document.getElementById(elementId);
+           // Change background color on focus
+        if (event.type === "focus") {
+            inputElement.style.background = "lightblue";
+            inputElement.style.color = "red";
+    }
+    // Reset background color on blur
+        else if (event.type === "blur") {
+            inputElement.style.background = "white";
+    }
+    }
+
+    
+
+</script>
+</html>

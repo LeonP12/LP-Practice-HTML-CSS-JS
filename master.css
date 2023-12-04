@@ -1,0 +1,93 @@
+body{
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: grey;
+    position: sticky;
+    top: 0;
+}
+  
+li {
+    float: left;
+    border-right: 1px solid #bbb;
+}
+  
+li:last-child {
+    border-right: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+.active {
+    background-color: #04AA6D;
+}
+
+.active-form {
+    background-color: #04AA6D; /* Color for the active "Form" link */
+}
+
+.centre {
+    background-color: aqua;
+    border: 1px solid black;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#formTitle {
+    text-align: center;
+}
+
+#submitButton {
+    background-color: limegreen;
+    color: white;
+    border: 0px;
+    width: 60px;
+    height: 40px;
+}
+
+#submitButton:hover {
+    background-color: green; /* Change background color on hover */
+}
+
+#resetButton {
+    background-color: rgb(59, 140, 190);
+    color: white;
+    border: 0px;
+    width: 60px;
+    height: 40px;
+}
+
+#resetButton:hover {
+    background-color: darkblue; /* Change background color on hover */
+}
+
+.round {
+    border-radius: 10px;
+}
+
+#text{
+    background-color: pink;
+    border: solid 3px blue;
+}
+
+img:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+}
