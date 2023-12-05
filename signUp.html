@@ -38,7 +38,8 @@
             <br>
             
             <label for="password">Password:</label>
-            <input type="password" id="password"class="roundBox" name="password" placeholder="Enter Password" onfocus="applyEffects('password')" onblur="applyEffects('password')" oninput="validatePassword()">
+            <input type="password" id="password" class="roundBox" name="password" placeholder="Enter Password" onfocus="applyEffects('password')" onblur="applyEffects('password')" oninput="validatePassword(event)">
+
             <label id="invalidPassword" style="color:red; visibility: hidden;">Invalid Password</label>
             
             <br>
@@ -69,18 +70,46 @@
     }
 
     function validatePassword() {
-    // Password needs to have 6 min, one number, and one special character
-    var passwordRegEx = /^(?=.*\d)(?=.*[!@#$%^&*()-_+=])[A-Za-z\d!@#$%^&*()-_+=]{6,}$/;
-    var password = document.getElementById("password").value;
-    var repeatPassword = document.getElementById("repeatPassword").value;
-    var invalidPassword = document.getElementById("invalidPassword");
-
-    if (!passwordRegEx.test(password) || password !== repeatPassword) {
-        alert("Password must have 6 characters minimum, at least one number, and one special character, or passwords do not match");
-        invalidPassword.style.visibility = "visible";
+        var password = document.getElementById("password").value;
+        var repeatPassword = document.getElementById("repeatPassword").value;
+        var invalidPassword = document.getElementById("invalidPassword");
+      
+        // Password needs to have 6 characters minimum
+        if (password.length < 6) {
+          showError("Password must have at least 6 characters.");
+          return false;
+        }
+      
+        // Password should contain at least one number
+        if (!/\d/.test(password)) {
+          showError("Password must contain at least one number.");
+          return false;
+        }
+      
+        // Password should contain at least one special character
+        if (!/[!@#$%^&*()-_+=]/.test(password)) {
+          showError("Password must contain at least one special character.");
+          return false;
+        }
+      
+        // Check if passwords match
+        if (password !== repeatPassword) {
+          showError("Passwords do not match.");
+          return false;
+        }
+      
+        // Clear any previous error messages
+        invalidPassword.style.visibility = "hidden";
+        return true; // Password is valid
+      }
+      
+      function showError(message) {
+        alert(message);
         event.preventDefault();
-    }
-}
+      }
+      
+    
+    
 
 
     function validateEmail(){
