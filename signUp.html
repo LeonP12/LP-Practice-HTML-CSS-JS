@@ -36,16 +36,17 @@
             <label id="invalidEmail" style="color:red; visibility: hidden;">Invalid Email</label>
             
             <br>
-            
+            <p style="font-size: 8px; color:red;" > (Password must be at least 6 characters long, can contain letters and numbers and must have at least 1 special character.)</p>
+
             <label for="password">Password:</label>
-            <input type="password" id="password" class="roundBox" name="password" placeholder="Enter Password" onfocus="applyEffects('password')" onblur="applyEffects('password')" oninput="validatePassword(event)">
+            <input type="password" id="password" class="roundBox" name="password" placeholder="Enter Password" onfocus="applyEffects('password')" onblur="applyEffects('password')">
 
             <label id="invalidPassword" style="color:red; visibility: hidden;">Invalid Password</label>
             
             <br>
             
             <label for="repeatPassword">Re-Enter Password:</label>
-            <input type="password" id="repeatPassword" class="roundBox" name="repeatPassword" placeholder="Re-Enter Password" onfocus="applyEffects('repeatPassword')" onblur="applyEffects('repeatPassword')" oninput="validatePassword()">
+            <input type="password" id="repeatPassword" class="roundBox" name="repeatPassword" placeholder="Re-Enter Password" onfocus="applyEffects('repeatPassword')" onblur="applyEffects('repeatPassword')">
             <br>
             
             <label for="dateOfBirth">Date of Birth:</label>
@@ -61,56 +62,26 @@
     </form>
 </body>
 <script>
-    function validate(event) {
+    function validate(event) { //so each function has been split and combined into this one function.
         validateFirstName();
         validateLastName();
         validateEmail();
-        validatePassword();
+        passwordMatch();
         return true; // if checks are passed, the form can be submitted
     }
 
-    function validatePassword() {
-        var password = document.getElementById("password").value;
+    function passwordMatch() {
+        var firstPassword = document.getElementById("password").value;
         var repeatPassword = document.getElementById("repeatPassword").value;
-        var invalidPassword = document.getElementById("invalidPassword");
-      
-        // Password needs to have 6 characters minimum
-        if (password.length < 6) {
-          showError("Password must have at least 6 characters.");
-          return false;
-        }
-      
-        // Password should contain at least one number
-        if (!/\d/.test(password)) {
-          showError("Password must contain at least one number.");
-          return false;
-        }
-      
-        // Password should contain at least one special character
-        if (!/[!@#$%^&*()-_+=]/.test(password)) {
-          showError("Password must contain at least one special character.");
-          return false;
-        }
-      
-        // Check if passwords match
-        if (password !== repeatPassword) {
-          showError("Passwords do not match.");
-          return false;
-        }
-      
-        // Clear any previous error messages
-        invalidPassword.style.visibility = "hidden";
-        return true; // Password is valid
-      }
-      
-      function showError(message) {
-        alert(message);
-        event.preventDefault();
-      }
-      
+        var passwordRegExp = /^(?=.*[A-Za-z0-9]{6,})(?=.*[!@#$%^&*()-_+=])[A-Za-z0-9!@#$%^&*()-_+=]+$/;
     
+        if (firstPassword !== repeatPassword || !passwordRegExp.test(firstPassword)) {
+            alert("Passwords do not match or do not meet the criteria.");
+            invalidPassword.style.visibility = "visible";
+            event.preventDefault();
+        }
+    }
     
-
 
     function validateEmail(){
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
